@@ -1,0 +1,375 @@
+\section{Der Satz von Bernoulli / de l’Hôpital}
+TODO: LA anpassen, sodass klarer ersichtlich wird, dass letztlich die 1. Ableitung Übrigbleibt.
+TODO: Die erste Übung sollte einfacher sein. Die anderen tendenziell auch\dots
+TODO: Beispiele als Lückentext\dots
+
+Die Taylorreihen können auch bei der Berechnung gewisser Grenzwerte nützlich sein:
+\begin{LA}{Grenzwerte $\lim_{x\rightarrow x_0} \frac{f(x)}{g(x)}$, wenn $f(x_0)=g(x_0)=0$}{}
+	\begin{enumerate}
+		\item Warm up: Berechnen Sie den Grenzwert $\lim_{x\rightarrow 0} \frac{3x^3+5x^2}{7x^5-2x^2}$.
+		\item In dieser Aufgabe soll der Grenzwert $\lim_{x\rightarrow 0} \frac{x-\sin(x)}{x^2(e^x-1)}$ ermittelt werden.
+		      \begin{enumerate}
+			      \item Wieso geht es nicht so wie in Aufgabe 1?
+			      \item Ersetzen Sie die Funktion $\sin(x)$ durch ihre Taylorreihe $ \sin(x) = x-\frac{x^3}{3!}+\frac{x^5}{5!}- \ldots$ um die Entwicklungsstelle $x_0=0$ und vereinfachen Sie den Zähler von $\frac{x-\sin(x)}{x^2(e^x-1)}$ zu $$x-\sin(x) = \frac{x^3}{3!}-\frac{x^5}{5!}+\ldots $$
+			      \item Gehen Sie mit dem Nenner gleich vor, um den Nenner zu vereinfachen zu $$x^2(e^x-1) = x^3+\frac{x^4}{2!}+\ldots $$
+			      \item  Berechnen Sie nun den Grenzwert $$ \lim_{x\rightarrow 0} \frac{x-\sin(x)}{x^2(e^x-1)} = \lim_{x\rightarrow 0} \frac{\frac{x^3}{3!}-\frac{x^5}{5!}+\ldots }{ x^3+\frac{x^4}{2!}+\ldots }$$
+			            indem Sie den Bruch mit $x^3$ kürzen.
+		      \end{enumerate}
+		\item Gehen Sie gleich vor, wie in Aufgabe 2, um den folgenden Grenzwert zu bestimmen:
+		      $$ \lim_{x\rightarrow 0} \frac{1-\cos(x)}{\sin^2(x)}$$
+	\end{enumerate}
+
+\end{LA}
+\clearpage
+\begin{satz}
+	{Regel von Bernoulli / de L'Hopital}{BH-1}
+	Seien $f$ und $g$ zwei Funktionen, die an der Stelle $x_0$ differenzierbar sind und für welche gilt: $f(x_0) = g(x_0) = 0$. Weiter sei $g'(x_0) \neq 0$. Dann folgt
+	\[
+		\lim_{{x \to x_0}} \frac{f(x)}{g(x)} = \frac{f'(x_0)}{g'(x_0)}
+	\]
+\end{satz}
+\begin{proof}
+	Wie in der Lernaufgabe kann man Zähler und Nenner durch ihre Taylorpolynome 1. Grades darstellen:
+	$$\frac{f(x)}{g(x)} = \frac{f(x_0) + f'(x_0)(x-x_0) + R^f_1(x)}{g(x_0) + g'(x_0)(x-x_0) + R^g_1(x)}$$
+	Weil nun $f(x_0) = g(x_0) = 0$ ist und mit dem Lagrange-Restglied folgt, dass es zwei Stellen $c_f, c_g \in [x_0, x]$ gibt, mit:
+	$$\frac{f(x)}{g(x)} = \frac{f'(x_0)(x-x_0) + \frac{f''(c_f)}{2} (x-x_0)^2}{ g'(x_0)(x-x_0) + \frac{g''(c_g)}{2}(x-x_0)^2}$$
+	Nun kann der Bruch mit $(x-x_0)$ gekürzt werden:
+	$$\frac{f(x)}{g(x)} = \frac{f'(x_0) + \frac{f''(c_f)}{2} (x-x_0)}{ g'(x_0) + \frac{g''(c_g)}{2}(x-x_0)}$$
+	Schliesslich findet man den Grenzwert
+	$$\lim_{{x \to x_0}} \frac{f(x)}{g(x)} = \frac{f'(x_0) + \frac{f''(c_f)}{2} (x_0-x_0)}{ g'(x_0) + \frac{g''(c_g)}{2}(x_0-x_0)} = \frac{f'(x_0)}{g'(x_0)}$$
+
+
+\end{proof}
+
+\begin{bsp}
+	{}{}
+	$$\lim_{x\rightarrow0} \frac{\sin(2x)}{x} = ? $$
+	Zähler und Nenner streben beide gegen $0$, womit die Voraussetzungen für den Satz von Bernoulli/de L’Hôpital erfüllt sind.
+	$$\lim_{x\rightarrow0} \frac{\sin(2x)}{x} \stackrel{\text{(BH)}}{=}  \frac{\cos(2 \cdot 0)\cdot 2}{1} = 2 $$
+\end{bsp}
+\begin{bsp}
+	{}{}
+	Die Regel von Bernoulli / de l’Hôpital darf auch mehrmals angewendet werden.
+	\[
+		\lim_{{x \to 0}} \frac{{x - \sin(x)}}{{x^3}} \overset{(\text{BH})}{=}
+		\lim_{{x \to 0}} \frac{{1 - \cos(x)}}{{3x^2}} \overset{(\text{BH})}{=}
+		\lim_{{x \to 0}} \frac{{\sin(x)}}{{6x}} \overset{(\text{BH})}{=}
+		\lim_{{x \to 0}} \frac{{\cos(x)}}{{6}} = \frac{1}{6}
+	\]
+
+\end{bsp}
+
+Es gibt noch weitere Varianten und Versionen der Regel von Bernoulli-de L'Hôpital. Die Grundaussage ist dabei jeweils sehr ähnlich. Unter bestimmten Bedingungen dürfen wir im Zähler und im Nenner ableiten. Erhalten wir damit einen bestimmten Ausdruck, so haben wir den ursprünglich gesuchten Grenzwert gefunden.
+
+\begin{satz}
+	{Varianten von Bernoulli / de L'Hôpital}{BH-Varianten}
+	\begin{enumerate}
+		\item Fall $\frac{0}{0}$ für $x \rightarrow x_0$ (Das ist die Variante von oben, angepasst für mehrfache Anwendung)
+
+		      Seien $f$ und $g$ zwei Funktionen, die an der Stelle $x_0$ differenzierbar sind und für welche gilt: $f(x_0) = g(x_0) = 0$. Weiter sei $g'(x_0) \neq 0$. Dann folgt
+		      \[
+			      \lim_{{x \to x_0}} \frac{f(x)}{g(x)} = \lim_{{x \to x_0}}\frac{f'(x_0)}{g'(x_0)}
+		      \]
+		      Sofern der rechte Grenzwert existiert.
+		\item Fall $\frac{0}{0}$ für $x \rightarrow \infty$
+
+		      Seien $f$ und $g$ zwei differenzierbare Funktionen, für welche gilt: $\lim_{{x \to \infty}} f(x) = \lim_{{x \to \infty}} g(x) = 0$. Dann folgt
+		      \[
+			      \lim_{{x \to \infty}} \frac{f(x)}{g(x)} = \lim_{{x \to \infty}} \frac{f'(x)}{g'(x)}
+		      \]
+		      Sofern der rechte Grenzwert existiert.
+		\item Fall $\frac{\infty}{\infty}$ für $x \rightarrow x_0$
+
+		      Seien $f$ und $g$ differenzierbare Funktionen, für welche $\lim_{{x \to x_0}} f(x) = \infty = \lim_{{x \to x_0}} g(x)$. Dann folgt
+		      $$\lim_{{x \to x_0}} \frac{f(x)}{g(x)} =\lim_{{x \to x_0}} \frac{f'(x)}{g'(x)}$$
+		      sofern der rechte Grenzwert existiert.
+
+
+
+		\item Fall $\frac{\infty}{\infty}$ für $x \rightarrow \infty$
+
+		      Seien $f$ und $g$ differenzierbare Funktionen, für welche $\lim_{{x \to \infty}} f(x) = \infty = \lim_{{x \to \infty}} g(x)$. Dann folgt
+		      $$\lim_{{x \to \infty}} \frac{f(x)}{g(x)} =\lim_{{x \to \infty}} \frac{f'(x)}{g'(x)}$$
+		      sofern der rechte Grenzwert existiert.
+
+
+	\end{enumerate}
+\end{satz}
+
+\begin{bsp}
+	{Ein Beispiel für die vierte Variante von BH}{}
+	\[
+		\lim_{{x \to \infty}} \frac{x}{e^x} \overset{(\text{BH})}{=}
+		\lim_{{x \to \infty}} \frac{1}{e^x} = 0
+	\]
+
+\end{bsp}
+
+
+\begin{bsp}
+	{Die Voraussetzungen sind wichtig!}{}
+	\[
+		\lim_{{x \to 0}} \frac{x}{e^x} = ?
+	\]
+	Achtung: Hierbei handelt es sich um einen Grenzwert vom Typ $0/1$. Die Voraussetzungen für den Satz von Bernoulli / de L'Hôpital sind damit nicht gegeben. Offensichtlich gilt
+	\[
+		\lim_{{x \to 0}} \frac{x}{e^x} = \frac{0}{1} =0
+	\]
+	Wird BH fälschlicherweise verwendet, erhält man das falsche Resultat:
+	\[
+		\lim_{{x \to 0}} \frac{x}{e^x} \neq \lim_{{x \to 0}} \frac{1}{e^x} = 1
+	\]
+\end{bsp}
+Die Regeln von Bernoulli-de l'Hôpital können auch für Grenzwerte hilfreich sein, die nicht den beiden Typen $0/0$  oder $\infty / \infty$  zuzuordnen sind.
+\begin{bsp}
+	{BH für Produkte}{}
+
+
+	\[
+		\lim_{{x \searrow 0}} ( x \cdot \ln(x)) = \lim_{{x\searrow 0}} \frac{\ln(x)}{\frac{1}{x}} \stackrel{\text{(BH)}}{=} \lim_{{x \searrow 0}} \frac{\frac{1}{x}}{-\frac{1}{x^2}} = \lim_{{x \searrow 0}} -x = 0
+	\]
+
+
+\end{bsp}
+\begin{bsp}
+	{}{}
+	Der Grenzwert $\lim\limits_{x\rightarrow \infty} \Big( 1-\frac{1}{x}\Big)^x$
+	ist vom Typ $1^\infty$. Wendet man auf den Term
+	$\Big( 1-\frac{1}{x}\Big)^x$ die Identität $e^{\ln (\cdot )}$
+	an, um anschliessend die Stetigkeit der Exponentialfunktion
+	$\operatorname{exp}(x)=e^x$ auszunutzen, so erhält man
+	\begin{eqnarray*} \lim_{x\rightarrow \infty} \Big( 1-\frac{1}{x}\Big)^x & = &
+		\lim_{x\rightarrow \infty} e^{ \ln \big( 1-\frac{1}{x}\big)^x } \; = \;
+		e^{ \lim_{x\rightarrow \infty} \Big[ x \, \ln \big( 1-\frac{1}{x}\big) \Big] } \\
+		& = & e^{ \lim_{x\rightarrow \infty} \Big[ \frac{\ln \big( \frac{x-1}{x}\big)}{1/x}\Big] } \; \stackrel{\frac{0}{0}}{=} \;
+		e^{ \lim_{x\rightarrow \infty} \Big[ \frac{\big( \frac{x}{x-1}\frac{1}{x^2}\big)}{-1/x^2}\Big] } \; = \; e^{-1} \; .
+	\end{eqnarray*}
+\end{bsp}
+
+
+\begin{ueb}
+	{}{    }
+	\begin{enumerate}
+		\item Bestimmen Sie die folgenden Grenzwerte.
+		      \begin{displaymath}
+			      \begin{array}{lll}
+				      \mbox{\bf (a)} \;\; \lim\limits_{x\rightarrow 0} \, \frac{x-\sin (x)}{x(1-\cos (x))} \hspace*{0.8cm} &
+				      \mbox{\bf (b)} \;\; \lim\limits_{x\rightarrow 0} \, \frac{\sin (x)-x\cos (x)}{\sin^3(x)}
+				      \hspace*{0.8cm}                                                                                      &
+				      \mbox{\bf (c)} \;\; \lim\limits_{x\rightarrow 0} \, \frac{\cos (2x)-\cos (x)}{\sin^2(x)}                                  \\
+				                                                                                                           &   &                \\
+				      \mbox{\bf (d)} \;\; \lim\limits_{x\rightarrow 0} \, \frac{\sin(2x)}{1-\cos (x)}                      &
+				      \mbox{\bf (e)} \;\; \lim\limits_{x\rightarrow 0} \, \Big( \frac{1}{\sin (x)}-\frac{1}{x}\Big)        &
+				      \mbox{\bf (f)} \;\; \lim\limits_{x\rightarrow 1} \, \frac{x^\alpha -1}{\ln (x)} \, , \hspace{0.3cm} \alpha \in \mathbb{R} \\
+				                                                                                                           &   &                \\
+				      \mbox{\bf (g)} \;\; \lim\limits_{x\searrow a} \, \frac{\sqrt{x}-\sqrt{a}}{\sqrt{x-a}}                &
+				      \mbox{\bf (h)} \;\; \lim\limits_{x\searrow 0} \, \frac{\sin (x)}{\ln (1+x^2)}                        &
+				      \mbox{\bf (i)} \;\; \lim\limits_{x\rightarrow 0} \, \frac{\sin^2 (x)}{xe^x-x}
+				      %\item $\lim\limits_{x\longrightarrow 0} \, \frac{e^x-x-1}{(1-\cos (x))^2}$
+				      %\item $\lim\limits_{x\longrightarrow \frac{\pi}{2}} \, \frac{\sin (2x)}{\cos^2 (x)}$
+			      \end{array}
+		      \end{displaymath}
+		\item Berechnen Sie die folgenden Grenzwerte.
+		      \begin{displaymath}
+			      \begin{array}{lll}
+				      \mbox{\bf (a)} \;\; \lim\limits_{x\searrow 0} \, x^x                                &
+				      \mbox{\bf (b)} \;\; \lim\limits_{x\rightarrow 1} \Big(  \ln(x) \cdot \ln (1-x)\Big) &
+				      \mbox{\bf (c)} \lim\limits_{x\rightarrow \infty} \, (x-\sqrt{(x-a)(x-b)}) \, , \hspace{0.3cm} a,b\in \mathbb{R} \\
+				                                                                                          &   &                       \\
+				      \mbox{\bf (d)} \;\; \lim\limits_{x\rightarrow \infty} \, x^{\frac{1}{x}}            &
+				      \mbox{\bf (e)} \;\; \lim\limits_{x\rightarrow \infty} \, \frac{x\ln (x)}{x^2-1}     &
+				      \mbox{\bf (f)} \;\; \lim\limits_{x\searrow 0} \, x^\alpha \cdot \ln (x) \, , \hspace{0.3cm} \alpha >0
+			      \end{array}
+		      \end{displaymath}
+		\item Berechnen Sie die folgenden Grenzwerte.
+		      \begin{displaymath}
+			      \begin{array}{lll}
+				      \mbox{\bf (a)} \;\; \lim\limits_{x\rightarrow 0} \, \frac{\sin (x)-x}{x^3} \hspace*{2cm}                     &
+				      \mbox{\bf (b)} \;\; \lim\limits_{x\rightarrow 0} \, \frac{\sin(5x)}{\sin (\frac{x}{3})} \hspace*{2cm}        &
+				      \mbox{\bf (c)} \;\; \lim\limits_{x\rightarrow 0} \, \frac{\ln (x)}{x^\alpha } \, , \hspace{0.3cm} x,\alpha >0      \\
+				                                                                                                                   &   & \\
+				      \mbox{\bf (d)} \;\; \lim\limits_{x\rightarrow \infty} \, \left( 1+\frac{1}{x}\right)^{x}                     &
+				      \mbox{\bf (e)} \;\; \lim\limits_{x\rightarrow 0} \, \left( \frac{1}{\sin (x)-\frac{1}{x}} \right)            &
+				      \mbox{\bf (f)} \;\; \lim\limits_{x\rightarrow \frac{\pi}{2}} \, \frac{\sin (2x)}{\cos^2 (x)}                       \\
+				                                                                                                                   &   & \\
+				      \mbox{\bf (g)} \;\; \lim\limits_{x\rightarrow 0} \, \frac{2\sin{2x}}{1+\cos {2x}}                            &
+				      \mbox{\bf (h)}\;\; \lim\limits_{x\rightarrow 0} \, \frac{\arcsin (x)}{x}                                     &
+				      \mbox{\bf (i)} \;\; \lim\limits_{x\rightarrow 0^+} \, \Big( \cot (x) \Big) ^{\tan (x)}                             \\
+				                                                                                                                   &   & \\
+				      \mbox{\bf (j)} \;\;\lim\limits_{x\rightarrow 0} \, \frac{x^\alpha}{e^x} \, , \hspace{0.3cm} x,\alpha >0      &
+				      \mbox{\bf (k)} \;\;\lim\limits_{x\rightarrow \infty} \, \frac{x^\alpha}{e^x} \, , \hspace{0.3cm} x,\alpha >0 &
+				      \mbox{\bf (l)} \lim\limits_{x\rightarrow 0} \, \frac{e^x-e^{-x}-2x}{x-\sin (x)}
+			      \end{array}
+		      \end{displaymath}
+		\item Beweisen Sie Variante 2 von Satz \ref*{satz:BH-Varianten}, indem Sie die Funktionen $F(z)=f(\frac{1}{x})$ und $G(z)=g(\frac{1}{x})$ und Variante 1 von BH verwenden.
+	\end{enumerate}
+\end{ueb}
+
+\emph{Lösungen:}
+
+\begin{enumerate}
+	\item
+
+	      {\small \begin{description}
+		      \item[(a)]  $\lim\limits_{x\rightarrow 0} \frac{x-\sin (x)}{x(1-\cos (x))}
+			            \stackrel{\frac{0}{0}}{=}
+			            \lim\limits_{x\rightarrow 0} \frac{1-\cos (x)}{1-\cos (x)+x\sin (x)}
+			            \stackrel{\frac{0}{0}}{=}
+			            \lim\limits_{x\rightarrow 0} \frac{\sin (x)}{2\sin (x)+x\cos (x)}
+			            \stackrel{\frac{0}{0}}{=}
+			            \lim\limits_{x\rightarrow 0} \frac{\cos (x)}{3\cos (x)-x\sin (x)} =  \frac{1}{3}$
+		      \item[(b)] $\lim\limits_{x\rightarrow 0} \, \frac{\sin (x)-x\cos (x)}{\sin^3 (x)}
+			            \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\rightarrow 0} \, \frac{\cos (x)-\cos (x)+x\sin (x)}{3\sin^2 (x) \, \cos (x)}
+			            \; = \; \frac{1}{3} \lim\limits_{x\rightarrow 0}\frac{x}{\sin (x)\cos(x)} \; \stackrel{\frac{0}{0}}{=} \; \frac{1}{3} \lim\limits_{x\rightarrow 0}\frac{1}{\cos^2(x)-\sin^2(x)}
+			            %\lim\limits_{x\rightarrow 0}\frac{x}{\sin (x)}\lim\limits_{x\rightarrow 0}\frac{1}{\cos (x)} \; 
+			            = \; \frac{1}{3}$
+		      \item[(c)] $\lim\limits_{x\rightarrow 0} \, \frac{\cos (2x)-\cos (x)}{\sin^2(x)}
+			            \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\rightarrow 0} \, \frac{-2\sin (2x)+\sin (x)}{2\sin (x) \, \cos (x)}
+			            \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\rightarrow 0} \, \frac{-4\cos (2x)+\cos (x)}{2\big[ \cos^2 (x) - \sin^2 (x)\big]} \; = \; -\frac{3}{2}$
+		      \item[(d)] $\lim\limits_{x\rightarrow 0} \, \frac{\sin(2x)}{1-\cos (x)}
+			            \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\rightarrow 0} \, \frac{2\cos(2x)}{\sin (x)}$ \\
+
+		            Hier ist nun eine kurze Diskussion angebracht. Während der Zähler gegen $2$  konvergiert, konvergiert der Nenner gegen $0$. Da das Vorzeichen des Nenners aber vom Vorzeichen von $x$ abhängt, liegt beim letzten Term keine Konvergenz vor. Nun haben wir festgestellt, dass dies prinzipiell einmal nicht den Schluss zulässt, dass der Ausgangsgrenzwert nicht existiert. In diesem Beispiel verhält es sich aber so, dass die einseitigen Grenzwerte existieren und mit den entsprechenden einseitigen Grenzwerten des Ausgangsterms übereinstimmen, der damit also auch nicht konvergent sein kann.
+		            Es gilt hier
+		            $$\lim\limits_{x\searrow 0} \, \frac{\sin(2x)}{1-\cos (x)} \; = \; \infty \hspace{1.5cm} \mbox{und} \hspace{1.5cm}
+			            \lim\limits_{x\nearrow 0} \, \frac{\sin(2x)}{1-\cos (x)} \; = \; -\infty \; . $$
+		      \item[(e)] $\lim\limits_{x\rightarrow 0} \, \Big( \frac{1}{\sin (x)}-\frac{1}{x}\Big) \; = \;
+			            \lim\limits_{x\rightarrow 0} \, \frac{x-\sin (x)}{x \, \sin (x)}
+			            \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\rightarrow 0} \, \frac{1-\cos (x)}{\sin (x) + x\cos (x)}
+			            \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\rightarrow 0} \, \frac{\sin (x)}{2 \cos (x) -x\sin (x)} \; = \; 0 $
+		      \item[(f)] $\lim\limits_{x\rightarrow 1} \, \frac{x^\alpha -1}{\ln (x)}
+			            \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\rightarrow 1} \, \frac{\alpha x^{\alpha -1}}{1/x} \; = \;
+			            \lim\limits_{x\rightarrow 1} \, \Big( \alpha \, x^\alpha \Big) \; = \; \alpha $
+		      \item[(g)] $\lim\limits_{x\searrow a} \, \frac{\sqrt{x}-\sqrt{a}}{\sqrt{x-a}}
+			            \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\searrow a} \, \frac{1/(2\sqrt{x})}{1/(2\sqrt{x-a})} \; = \;
+			            \lim\limits_{x\searrow a} \, \frac{\sqrt{x-a}}{\sqrt{x}} \; = \; 0 $
+		      \item[(h)] $\lim\limits_{x\searrow 0} \, \frac{\sin (x)}{\ln (1+x^2)}
+			            \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\searrow 0} \, \frac{\cos (x) \, (1+x^2)}{2x} \; = \; \infty$
+		      \item[(i)] $\lim\limits_{x\rightarrow 0} \, \frac{\sin^2 (x)}{xe^x-x} \; = \;
+			            %\underbrace{\lim\limits_{x\rightarrow 0} \, \frac{\sin (x)}{x}}_{=1} \, \cdot \,
+			            %\lim\limits_{x\rightarrow 0} \, \frac{\sin (x)}{e^x-1}
+			            \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\rightarrow 0} \, \frac{2\sin (x) \cos(x)}{e^x-1+xe^x} \; = \;
+			            \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\rightarrow 0} \, \frac{2(\sin^2(x)-\cos^2 (x))}{2e^x+xe^x} \; = \; 1$
+	      \end{description}}
+	      \smallskip
+
+
+	\item
+	      \begin{description}
+		      \item[(a)] $\lim\limits_{x\searrow 0} \, x^x =
+			            \lim\limits_{x\searrow 0} \operatorname{exp}\Big( \ln (x^x)\Big) =
+			            \operatorname{exp} \Big( \lim\limits_{x\searrow 0} \Big[ \frac{\ln (x)}{1/x}\Big] \Big)
+			            \stackrel{\frac{0}{0}}{=}
+			            \operatorname{exp} \Big(  \lim\limits_{x\searrow 0} \, \frac{1/x}{-1/x^2}\Big) =
+			            e^0 \; = \; 1$
+		      \item[(b)] $\lim\limits_{x\rightarrow 1} \Big(  \ln(x) \, \ln (1-x)\Big) =
+			            \lim\limits_{x\rightarrow 1} \, \frac{\ln(1-x)}{1/\ln (x)}
+			            \stackrel{\frac{\infty}{\infty}}{=}
+			            \lim\limits_{x\rightarrow 1} \, \frac{x\big( \ln(x)\big)^2}{1-x}
+			            \stackrel{\frac{0}{0}}{=}
+			            \lim\limits_{x\rightarrow 1} \, \frac{\big( \ln(x)\big)^2 +2\ln (x)}{-1}  =  0 $
+		      \item[(c)] Den gesuchten Grenzwert bringen wir durch Erweitern mit $x+\sqrt{(x-a)(x-b)}$ auf die gewünschte Form. \\
+		            $\lim\limits_{x\rightarrow \infty} \, (x-\sqrt{(x-a)(x-b)}) =
+			            \lim\limits_{x\rightarrow \infty} \, \frac{x^2-(x-a)(x-b)}{x+\sqrt{(x-a)(x-b)}} =
+			            \lim\limits_{x\rightarrow \infty} \, \frac{(a+b)x-ab}{x+\sqrt{(x-a)(x-b)}}
+			            \stackrel{\frac{\infty}{\infty}}{=}
+			            \frac{a+b}{2}$, \\
+		            wobei wir im letzten Schritt etwas einfacher als die Regel von de l'H\^{o}spital anzuwenden, wie gewohnt die höchste gemeinsame Potenz von Zähler und Nenner (hier also $x$) ausklammern konnten.
+		      \item[(d)] $\lim\limits_{x\rightarrow \infty}  x^\frac{1}{x}  =
+			            \lim\limits_{x\rightarrow \infty} \operatorname{exp}\Big( \ln (x^\frac{1}{x})\Big) \!  = \!
+			            \operatorname{exp} \Big( \lim\limits_{x\rightarrow \infty} \Big[ \frac{\ln (x)}{x}\Big] \Big)
+			            \! \stackrel{\frac{\infty}{\infty}}{=} \!
+			            \operatorname{exp} \Big(  \lim\limits_{x\rightarrow \infty} \frac{1/x}{1}\Big)  \! = \!
+			            e^0  \! = \!  1$
+		      \item[(e)] $\lim\limits_{x\rightarrow \infty} \, \frac{x\ln (x)}{x^2-1}
+			            \; \stackrel{\frac{\infty}{\infty}}{=} \;
+			            \lim\limits_{x\rightarrow \infty} \, \frac{\ln (x)+1}{2x}
+			            \; \stackrel{\frac{\infty}{\infty}}{=} \;
+			            \lim\limits_{x\rightarrow \infty} \, \frac{1/x}{2} \; = \; 0$
+		      \item[(f)] $\lim\limits_{x\searrow 0} \, x^\alpha \cdot \ln (x) \; = \;
+			            \lim\limits_{x\searrow 0} \, \frac{\ln (x)}{x^{-\alpha}}
+			            \; \stackrel{\frac{\infty}{\infty}}{=} \;
+			            \lim\limits_{x\searrow 0} \, \frac{1/x}{-\alpha \, x^{-\alpha -1}} \; = \;
+			            \lim\limits_{x\searrow 0} \, \frac{x^{\alpha}}{-\alpha} \; = \; 0$
+	      \end{description}
+	      \smallskip
+
+	\item
+	      \begin{description}
+		      \item[(a)] $\lim\limits_{x\rightarrow 0} \, \frac{\sin (x) -x}{x^3}
+			            \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\rightarrow 0} \, \frac{\cos (x)-1}{3x^2} \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\rightarrow 0} \, \frac{-\sin (x)}{6x} \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\rightarrow 0} \, \frac{-\cos (x)}{6} \; = \; -\frac{1}{6} $
+		      \item[(b)] $\lim\limits_{x\rightarrow 0} \, \frac{\sin(5x)}{\sin (\frac{x}{3})}
+			            \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\rightarrow 0} \, \frac{5\cos (5x)}{\frac{1}{3}\cos (\frac{x}{3})} \; = \;
+			            15$
+		      \item[(c)] {\bf ACHTUNG!} Dieser Grenzwert ist vom Typ $\frac{-\infty}{0^+}$. Hiermit sind die Voraussetzungen für die Anwendung der Regeln de l'H\^{o}spitals nicht erfüllt. Der Grenzwert ist trivialerweise
+		            $\lim\limits_{x\rightarrow 0} \, \frac{\ln (x)}{x^\alpha} =-\infty$
+		      \item[(d)] Oft wird dieser Grenzwert als Definition der Eulerschen Zahl herangezogen.
+		            \begin{eqnarray*} \lim_{x\rightarrow \infty} \Big( 1+\frac{1}{x}\Big)^x & = &
+			            \lim_{x\rightarrow \infty} \operatorname{exp} \Big( \ln \big( 1+\frac{1}{x}\big)^x\Big) \; = \;
+			            \operatorname{exp} \Big( \lim_{x\rightarrow \infty} \Big[ x \, \ln \big( 1+\frac{1}{x}\big) \Big] \Big) \\
+			            & = & \operatorname{exp} \Big( \lim_{x\rightarrow \infty} \Big[ \frac{\ln \big( \frac{x+1}{x}\big)}{1/x}\Big] \Big) \stackrel{\frac{0}{0}}{=}
+			            \operatorname{exp} \Big( \lim_{x\rightarrow \infty} \Big[ \frac{\big( \frac{x}{x+1}\frac{-1}{x^2}\big)}{-1/x^2}\Big] \Big) = e^{1} = e
+		            \end{eqnarray*}
+		      \item[(e)] {\bf ACHTUNG!} Auch dieser Grenzwert erfüllt nicht die Voraussetzungen, nach denen die Regeln von de l'H\^{o}spital verlangen. Da der Betrag des Nenners uneigentlich gegen Unendlich konvergiert, gilt
+		            $\lim\limits_{x\rightarrow 0} \, \left( \frac{1}{\sin (x)-\frac{1}{x}} \right) =0$.
+		      \item[(f)] $\lim\limits_{x\rightarrow \frac{\pi}{2}} \, \frac{\sin (2x)}{\cos^2 (x)}
+			            \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\rightarrow \frac{\pi}{2}} \, \frac{2\cos (2x)}{-2\cos (x)\sin (x)} $ \\
+		            Und abermals ist Vorsicht geboten: Während der Nenner unabhängig von $x>\frac{\pi}{2}$ oder $x<\frac{\pi}{2}$ gegen $1$ strebt, besitzt der gegen $0$ konvergente Nenner je nach dem ein unterschiedliches Vorzeichen. Es gilt
+		            $$\lim\limits_{x\searrow \frac{\pi}{2}} \, \frac{\sin (2x)}{\cos^2 (x)} \; = \; -\infty
+			            \hspace{1.5cm} \mbox{bzw.} \hspace{1.5cm}
+			            \lim\limits_{x\nearrow \frac{\pi}{2}} \, \frac{\sin (2x)}{\cos^2 (x)} \; = \; \infty \, .$$
+		            Der zu untersuchende Grenzwert existiert demnach also nicht.
+		      \item[(g)] {\bf ACHTUNG!} Die Voraussetzungen für die Anwendung de l'H\^{o}spitals sind nicht erfüllt. Es gilt
+		            $\lim\limits_{x\rightarrow 0} \, \frac{2\sin{2x}}{1+\cos {2x}} \, = \, 0$.
+		      \item[(h)] $\lim\limits_{x\rightarrow 0} \, \frac{\arcsin (x)}{x}
+			            \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\rightarrow 0} \, \frac{1}{\sqrt{1-x^2}} \; = \; 1$
+		      \item[(i)] $\lim\limits_{x\searrow 0} \, \Big( \cot (x) \Big) ^{\tan (x)}
+			            \; = \;
+			            \operatorname{exp}\Big( \lim\limits_{x\searrow 0} \frac{\ln \big( 1/\tan (x)\big)}{1/\tan (x)}\Big)
+			            \; \stackrel{\frac{\infty}{\infty}}{=} \;
+			            \operatorname{exp}\big( \lim\limits_{x\searrow 0} \tan (x) \big) \; = \; e^0 \; = \; 1 $
+		      \item[(j)] {\bf ACHTUNG:} Auch dieser Grenzwert erfüllt nicht die Voraussetzungen, nach denen die Regeln von de l'H\^{o}spital verlangen. Es gilt trivialerweise
+		            $\lim\limits_{x\rightarrow 0} \, \frac{x^\alpha}{e^x} \, = \, 0$.
+		      \item[(k)] Zur Bestimmung dieses Grenzwerts, dessen Verschwinden mathematisch prä\-zi\-siert, dass die $e$-Funktion stärker wächst als jede Potenzfunktion,
+		            muss die Regel von de l'H\^{o}spital für $\alpha \in \mathbb{N}$ genau $\alpha$-mal und anderenfalls $([\alpha ]+1)$-mal angewendet werden, wobei $[\cdot ]$ die Abrundungsfunktion ist. Es folgt $\lim\limits_{x\rightarrow \infty} \, \frac{x^\alpha}{e^x} =0$.
+		      \item[(l)] $\lim\limits_{x\rightarrow 0} \, \frac{e^x-e^{-x}-2x}{x-\sin (x)}
+			            \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\rightarrow 0} \, \frac{e^x+e^{-x}-2}{1-\cos (x)}
+			            \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\rightarrow 0} \, \frac{e^x-e^{-x}}{\sin (x)}
+			            \; \stackrel{\frac{0}{0}}{=} \;
+			            \lim\limits_{x\rightarrow 0} \, \frac{e^x+e^{-x}}{\cos (x)} \; = \; 2$
+	      \end{description}
+	\item Ersetze die Variable \( x \) durch \( z = \frac{1}{x} \). Dann folgt
+	      \[
+		      \lim_{{x \to \infty}} \frac{f(x)}{g(x)} = \lim_{{z \to 0}} \frac{f\left(\frac{1}{z}\right)}{g\left(\frac{1}{z}\right)}
+	      \]
+	      Nun kann man die 1. Regel von de L'Hôpital anwenden und erhält (Achtung: Kettenregel!)
+	      \[
+		      \begin{aligned}
+			       & \lim_{{x \to \infty}} \frac{f(x)}{g(x)}                                                         \\
+			       & = \lim_{{z \to 0}} \frac{f\left(\frac{1}{z}\right)}{g\left(\frac{1}{z}\right)}                  \\
+			       & \stackrel{\text{BH1}}{=} \lim_{{z \to 0}} \frac{f'(1/z) \cdot (-1/z^2)}{g'(1/z) \cdot (-1/z^2)} \\
+			       & = \lim_{{z \to 0}} \frac{f'(1/z)}{g'(1/z)}                                                      \\
+			       & = \lim_{{x \to \infty}} \frac{f'(x)}{g'(x)}
+		      \end{aligned}
+	      \]
+
+\end{enumerate}
